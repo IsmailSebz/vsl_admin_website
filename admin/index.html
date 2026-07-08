@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin — Victoria Sugar</title>
+  <link rel="icon" href="/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .admin-section{display:none;}
+    .admin-section.active-section{display:block;}
+    .album-tab-btn{padding:.375rem .875rem;border-radius:2rem;font-size:.8125rem;font-weight:500;cursor:pointer;border:1px solid #d1d5db;background:#fff;color:#374151;transition:all .15s;}
+    .album-tab-btn:hover{border-color:#1b5e20;color:#1b5e20;}
+    .active-tab{background:#1b5e20!important;color:#fff!important;border-color:#1b5e20!important;}
+  </style>
+</head>
+<body style="background:#f9fafb;">
+<div style="display:flex;min-height:100vh;">
+  <!-- Sidebar -->
+  <aside style="width:15rem;background:#0f3d12;flex-shrink:0;display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;overflow-y:auto;">
+    <div style="padding:1.5rem 1.25rem;border-bottom:1px solid #145218;">
+      <a href="#dashboard" style="display:flex;align-items:center;gap:.75rem;text-decoration:none;">
+        <img src="/logo.jpg" style="width:2.5rem;height:2.5rem;border-radius:.5rem;background:#fff;padding:.2rem;object-fit:contain;">
+        <div><div style="color:#fff;font-weight:700;font-size:.9375rem;font-family:Georgia,serif;">Victoria Sugar</div><div style="color:#c8a84b;font-size:.6875rem;">Admin Panel</div></div>
+      </a>
+    </div>
+    <nav style="padding:1rem .75rem;flex:1;">
+<a href="#dashboard" data-section="dashboard" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Dashboard</a>
+<a href="#news" data-section="news" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>News</a>
+<a href="#gallery" data-section="gallery" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"/></svg>Gallery</a>
+<a href="#careers" data-section="careers" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>Careers</a>
+<a href="#tenders" data-section="tenders" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>Tenders</a>
+<a href="#events" data-section="events" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>Events</a>
+<a href="#press" data-section="press" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9"/></svg>Press Room</a>
+<a href="#downloads" data-section="downloads" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Downloads</a>
+<a href="#inquiries" data-section="inquiries" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Inquiries</a>
+<a href="#newsletter" data-section="newsletter" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>Newsletter</a>
+<a href="#settings" data-section="settings" class="admin-nav-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/></svg>Settings</a>
+    </nav>
+    <div style="padding:1rem .75rem;border-top:1px solid #145218;">
+      <div id="admin-user" style="color:#b4dab6;font-size:.75rem;padding:.5rem 1rem;margin-bottom:.5rem;"></div>
+      <button id="logout-btn" class="admin-nav-link w-full"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Log Out</button>
+    </div>
+  </aside>
+  <!-- Main -->
+  <main style="margin-left:15rem;flex:1;padding:2rem;">
+    <div style="max-width:72rem;margin:0 auto;">
+
+<!-- ============ DASHBOARD ============ -->
+<section id="sec-dashboard" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+  <div>
+    <h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Dashboard</h1>
+    <p style="color:#6b7280;font-size:.875rem;margin-top:.25rem;">Welcome back. Here's an overview of your website content.</p>
+  </div>
+  <a href="/" target="_blank" class="btn-secondary text-sm px-4 py-2">View Site →</a>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+  <div class="card p-5"><p style="font-size:.75rem;color:#6b7280;font-weight:500;text-transform:uppercase;letter-spacing:.05em;">News Articles</p><p id="stat-news" style="font-size:2rem;font-weight:700;color:#0f3d12;font-family:Georgia,serif;">—</p></div>
+  <div class="card p-5"><p style="font-size:.75rem;color:#6b7280;font-weight:500;text-transform:uppercase;letter-spacing:.05em;">Open Tenders</p><p id="stat-tenders" style="font-size:2rem;font-weight:700;color:#0f3d12;font-family:Georgia,serif;">—</p></div>
+  <div class="card p-5"><p style="font-size:.75rem;color:#6b7280;font-weight:500;text-transform:uppercase;letter-spacing:.05em;">Inquiries</p><p id="stat-inq" style="font-size:2rem;font-weight:700;color:#0f3d12;font-family:Georgia,serif;">—</p></div>
+  <div class="card p-5"><p style="font-size:.75rem;color:#6b7280;font-weight:500;text-transform:uppercase;letter-spacing:.05em;">Subscribers</p><p id="stat-subs" style="font-size:2rem;font-weight:700;color:#0f3d12;font-family:Georgia,serif;">—</p></div>
+</div>
+<div class="card p-6 mb-6">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+    <h2 style="font-family:Georgia,serif;font-weight:700;color:#0f3d12;">Recent Inquiries</h2>
+    <a href="#inquiries" style="color:#1b5e20;font-size:.875rem;text-decoration:none;font-weight:500;">View all →</a>
+  </div>
+  <div id="recent-inq" style="overflow-x:auto;"><p style="color:#9ca3af;text-align:center;padding:1.5rem 0;">Loading...</p></div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <a href="#news" class="card p-5 text-center" style="text-decoration:none;">
+    <div style="font-size:1.5rem;margin-bottom:.5rem;">📰</div>
+    <p style="font-weight:600;color:#0f3d12;font-size:.9375rem;">Add News</p>
+  </a>
+  <a href="#careers" class="card p-5 text-center" style="text-decoration:none;">
+    <div style="font-size:1.5rem;margin-bottom:.5rem;">💼</div>
+    <p style="font-weight:600;color:#0f3d12;font-size:.9375rem;">Post Job</p>
+  </a>
+  <a href="#tenders" class="card p-5 text-center" style="text-decoration:none;">
+    <div style="font-size:1.5rem;margin-bottom:.5rem;">📋</div>
+    <p style="font-weight:600;color:#0f3d12;font-size:.9375rem;">Add Tender</p>
+  </a>
+  <a href="#gallery" class="card p-5 text-center" style="text-decoration:none;">
+    <div style="font-size:1.5rem;margin-bottom:.5rem;">🖼️</div>
+    <p style="font-weight:600;color:#0f3d12;font-size:.9375rem;">Upload Photo</p>
+  </a>
+</div>
+</section>
+
+<!-- ============ NEWS ============ -->
+<section id="sec-news" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+  <h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">News Articles</h1>
+  <button onclick="openNewsModal()" class="btn-primary">+ Add New</button>
+</div>
+<div class="card" style="overflow:hidden;margin-bottom:2rem;">
+  <table style="width:100%;border-collapse:collapse;">
+    <thead style="background:#f9fafb;"><tr><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Title</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Category</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Date</th><th style="padding:.5rem .75rem;"></th></tr></thead>
+    <tbody id="news-items-body"><tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody>
+  </table>
+</div>
+<div id="news-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="closeNewsModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280;">&times;</button>
+    <h2 id="news-modal-title" style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add New</h2>
+    <form id="news-item-form">
+      <input type="hidden" name="_id">
+<div style="margin-bottom:1rem;"><label class="form-label">Title *</label><input class="form-input" type="text" name="title" placeholder="Article title" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Category</label><select class="form-input" name="category"><option value="Company News">Company News</option><option value="Agriculture">Agriculture</option><option value="Sustainability">Sustainability</option><option value="Community">Community</option><option value="Products">Products</option><option value="Events">Events</option></select></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Excerpt</label><textarea class="form-input" name="excerpt" rows="2" ></textarea></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Content (HTML)</label><textarea class="form-input" name="content" rows="8" ></textarea></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Image URL</label><input class="form-input" type="text" name="image_url" placeholder="https://media.victoriasugar.ug/images/..." ></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Publish Date</label><input class="form-input" type="date" name="published_at" placeholder="" ></div>
+<div style="margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;"><input type="checkbox" name="published" id="news-published" checked><label for="news-published" class="form-label" style="margin:0;">Published (visible on site)</label></div>
+      <div id="news-form-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div>
+      <div style="display:flex;gap:.75rem;">
+        <button type="submit" id="news-form-submit" class="btn-primary flex-1 justify-center">Save</button>
+        <button type="button" onclick="closeNewsModal()" class="btn-secondary">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="sec-gallery" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+  <h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Gallery</h1>
+  <div style="display:flex;gap:.75rem;">
+    <button onclick="openGalleryAlbumModal()" class="btn-secondary text-sm px-4 py-2">+ Add Album</button>
+    <button onclick="openGalleryPhotoModal()" class="btn-primary text-sm px-4 py-2">+ Add Photo</button>
+  </div>
+</div>
+<div class="card p-6 mb-6">
+  <h3 style="font-family:Georgia,serif;font-weight:700;color:#0f3d12;margin-bottom:1rem;">Albums</h3>
+  <div id="gallery-albums-list" class="flex flex-wrap gap-2 mb-4"></div>
+  <div style="font-size:.75rem;color:#9ca3af;">Click an album to filter photos. Add photos with + Add Photo above.</div>
+</div>
+<div id="gallery-photos-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+<div id="gallery-album-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:1rem;padding:2rem;max-width:28rem;width:100%;position:relative;">
+    <button onclick="document.getElementById('gallery-album-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;">&times;</button>
+    <h2 style="font-family:Georgia,serif;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add Album</h2>
+    <form id="gallery-album-form">
+      <div style="margin-bottom:1rem;"><label class="form-label">Album Name *</label><input class="form-input" name="name" required></div>
+      <div style="margin-bottom:1.5rem;"><label class="form-label">Description</label><textarea class="form-input" name="description" rows="2"></textarea></div>
+      <button type="submit" class="btn-primary w-full justify-center">Create Album</button>
+    </form>
+  </div>
+</div>
+<div id="gallery-photo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:1rem;padding:2rem;max-width:28rem;width:100%;position:relative;">
+    <button onclick="document.getElementById('gallery-photo-modal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;">&times;</button>
+    <h2 style="font-family:Georgia,serif;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add Photo</h2>
+    <form id="gallery-photo-form">
+      <div style="margin-bottom:1rem;"><label class="form-label">Image URL * (from R2)</label><input class="form-input" name="image_url" placeholder="https://media.victoriasugar.ug/images/..." required></div>
+      <div style="margin-bottom:1rem;"><label class="form-label">Caption</label><input class="form-input" name="caption" placeholder="Optional caption"></div>
+      <div style="margin-bottom:1.5rem;"><label class="form-label">Album</label><select class="form-input" name="album_id" id="gallery-photo-album-select"><option value="">No album</option></select></div>
+      <div id="gallery-photo-preview" style="margin-bottom:1rem;display:none;"><img id="gallery-preview-img" style="width:100%;border-radius:.5rem;max-height:10rem;object-fit:cover;"></div>
+      <div id="gallery-photo-err" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div>
+      <button type="submit" class="btn-primary w-full justify-center">Add Photo</button>
+    </form>
+  </div>
+</div>
+</section>
+
+<!-- ============ CAREERS ============ -->
+<section id="sec-careers" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;"><h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Job Listings</h1><button onclick="openCareersModal()" class="btn-primary">+ Add New</button></div>
+<div class="card" style="overflow:auto;margin-bottom:2rem;"><table style="width:100%;border-collapse:collapse;"><thead style="background:#f9fafb;"><tr><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Title</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Department</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Type</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Closing Date</th><th style="padding:.5rem .75rem;"></th></tr></thead><tbody id="careers-items-body"><tr><td colspan="6" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody></table></div>
+<div id="careers-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;"><div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;"><button onclick="closeCareersModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280;">&times;</button><h2 id="careers-modal-title" style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add New</h2><form id="careers-item-form"><input type="hidden" name="_id">
+<div style="margin-bottom:1rem;"><label class="form-label">Job Title *</label><input class="form-input" name="title" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Department</label>
+  <select class="form-input" name="department">
+    <option>Agriculture</option><option>Engineering</option><option>Finance</option>
+    <option>HR</option><option>Operations</option><option>Commercial</option><option>IT</option><option>Admin</option>
+  </select></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Location</label><input class="form-input" name="location" placeholder="e.g. Luwero, Uganda"></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Type</label>
+  <select class="form-input" name="type"><option>Full-time</option><option>Part-time</option><option>Contract</option><option>Internship</option></select></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Closing Date</label><input class="form-input" type="date" name="closing_date"></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Description</label><textarea class="form-input" name="description" rows="4"></textarea></div>
+<div style="margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;"><input type="checkbox" name="active" id="careers-f-active" checked><label for="careers-f-active" class="form-label" style="margin:0;">Active (visible on site)</label></div>
+<div id="careers-form-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div><div style="display:flex;gap:.75rem;"><button type="submit" id="careers-form-submit" class="btn-primary flex-1 justify-center">Save</button><button type="button" onclick="closeCareersModal()" class="btn-secondary">Cancel</button></div></form></div></div>
+</section>
+
+<!-- ============ TENDERS ============ -->
+<section id="sec-tenders" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;"><h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Tenders</h1><button onclick="openTendersModal()" class="btn-primary">+ Add New</button></div>
+<div class="card" style="overflow:auto;margin-bottom:2rem;"><table style="width:100%;border-collapse:collapse;"><thead style="background:#f9fafb;"><tr><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Title</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Ref</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Deadline</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th><th style="padding:.5rem .75rem;"></th></tr></thead><tbody id="tenders-items-body"><tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody></table></div>
+<div id="tenders-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;"><div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;"><button onclick="closeTendersModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280;">&times;</button><h2 id="tenders-modal-title" style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add New</h2><form id="tenders-item-form"><input type="hidden" name="_id">
+<div style="margin-bottom:1rem;"><label class="form-label">Title *</label><input class="form-input" name="title" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Reference Number</label><input class="form-input" name="reference" placeholder="e.g. VSL/PROC/2026/001"></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Description</label><textarea class="form-input" name="description" rows="3"></textarea></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Deadline *</label><input class="form-input" type="date" name="deadline" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Document URL (PDF)</label><input class="form-input" name="file_url" placeholder="https://..."></div>
+<div id="tenders-form-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div><div style="display:flex;gap:.75rem;"><button type="submit" id="tenders-form-submit" class="btn-primary flex-1 justify-center">Save</button><button type="button" onclick="closeTendersModal()" class="btn-secondary">Cancel</button></div></form></div></div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section id="sec-events" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;"><h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Events</h1><button onclick="openEventsModal()" class="btn-primary">+ Add New</button></div>
+<div class="card" style="overflow:auto;margin-bottom:2rem;"><table style="width:100%;border-collapse:collapse;"><thead style="background:#f9fafb;"><tr><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Title</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Location</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Date</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th><th style="padding:.5rem .75rem;"></th></tr></thead><tbody id="events-items-body"><tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody></table></div>
+<div id="events-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;"><div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;"><button onclick="closeEventsModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280;">&times;</button><h2 id="events-modal-title" style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add New</h2><form id="events-item-form"><input type="hidden" name="_id">
+<div style="margin-bottom:1rem;"><label class="form-label">Title *</label><input class="form-input" name="title" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Event Date *</label><input class="form-input" type="datetime-local" name="event_date" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Location</label><input class="form-input" name="location" placeholder="e.g. Kampala, Uganda"></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Description</label><textarea class="form-input" name="description" rows="3"></textarea></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Image URL</label><input class="form-input" name="image_url" placeholder="https://..."></div>
+<div id="events-form-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div><div style="display:flex;gap:.75rem;"><button type="submit" id="events-form-submit" class="btn-primary flex-1 justify-center">Save</button><button type="button" onclick="closeEventsModal()" class="btn-secondary">Cancel</button></div></form></div></div>
+</section>
+
+<!-- ============ PRESS ROOM ============ -->
+<section id="sec-press" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+  <h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Press Room</h1>
+  <button onclick="openPressModal()" class="btn-primary">+ Add Release</button>
+</div>
+<div class="card" style="overflow:auto;"><table style="width:100%;border-collapse:collapse;">
+  <thead style="background:#f9fafb;"><tr>
+    <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Title</th>
+    <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Category</th>
+    <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Date</th>
+    <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th>
+    <th style="padding:.5rem .75rem;"></th>
+  </tr></thead>
+  <tbody id="press-items-body"><tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody>
+</table></div>
+<div id="press-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="closePressModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;">&times;</button>
+    <h2 id="press-modal-title" style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add Press Release</h2>
+    <form id="press-item-form"><input type="hidden" name="_id">
+      <div style="margin-bottom:1rem;"><label class="form-label">Title *</label><input class="form-input" name="title" required></div>
+      <div style="margin-bottom:1rem;"><label class="form-label">Category</label>
+        <select class="form-input" name="category"><option>Press Release</option><option>Statement</option><option>Announcement</option></select></div>
+      <div style="margin-bottom:1rem;"><label class="form-label">Summary</label><textarea class="form-input" name="summary" rows="3"></textarea></div>
+      <div style="margin-bottom:1rem;"><label class="form-label">PDF File URL</label><input class="form-input" name="file_url" placeholder="https://..."></div>
+      <div style="margin-bottom:1rem;"><label class="form-label">Publish Date</label><input class="form-input" type="date" name="published_at"></div>
+      <div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;"><input type="checkbox" name="published" id="press-f-pub" checked><label for="press-f-pub" class="form-label" style="margin:0;">Published</label></div>
+      <div id="press-form-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div>
+      <div style="display:flex;gap:.75rem;"><button type="submit" id="press-form-submit" class="btn-primary flex-1 justify-center">Save</button><button type="button" onclick="closePressModal()" class="btn-secondary">Cancel</button></div>
+    </form>
+  </div>
+</div>
+</section>
+
+<!-- ============ DOWNLOADS ============ -->
+<section id="sec-downloads" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;"><h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Downloads</h1><button onclick="openDownloadsModal()" class="btn-primary">+ Add New</button></div>
+<div class="card" style="overflow:auto;margin-bottom:2rem;"><table style="width:100%;border-collapse:collapse;"><thead style="background:#f9fafb;"><tr><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Title</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Description</th><th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th><th style="padding:.5rem .75rem;"></th></tr></thead><tbody id="downloads-items-body"><tr><td colspan="4" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody></table></div>
+<div id="downloads-modal-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;"><div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;"><button onclick="closeDownloadsModal()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;">&times;</button><h2 id="downloads-modal-title" style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Add New</h2><form id="downloads-item-form"><input type="hidden" name="_id">
+<div style="margin-bottom:1rem;"><label class="form-label">Title *</label><input class="form-input" name="title" required></div>
+<div style="margin-bottom:1rem;"><label class="form-label">Description</label><textarea class="form-input" name="description" rows="2"></textarea></div>
+<div style="margin-bottom:1rem;"><label class="form-label">File URL *</label><input class="form-input" name="file_url" placeholder="https://media.victoriasugar.ug/docs/..." required></div>
+<div style="margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem;"><input type="checkbox" name="published" id="downloads-f-pub2" checked><label for="downloads-f-pub2" class="form-label" style="margin:0;">Published (visible on site)</label></div>
+<div id="downloads-form-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;"></div><div style="display:flex;gap:.75rem;"><button type="submit" id="downloads-form-submit" class="btn-primary flex-1 justify-center">Save</button><button type="button" onclick="closeDownloadsModal()" class="btn-secondary">Cancel</button></div></form></div></div>
+</section>
+
+<!-- ============ INQUIRIES ============ -->
+<section id="sec-inquiries" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+  <h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Inquiries</h1>
+  <select id="inq-status-filter" class="form-input" style="max-width:12rem;">
+    <option value="all">All Statuses</option>
+    <option value="new">New</option><option value="read">Read</option>
+    <option value="replied">Replied</option><option value="closed">Closed</option>
+  </select>
+</div>
+<div class="card" style="overflow:auto;">
+  <table style="width:100%;border-collapse:collapse;">
+    <thead style="background:#f9fafb;"><tr>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Name</th>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Email</th>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Subject</th>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Date</th>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th>
+      <th style="padding:.5rem .75rem;"></th>
+    </tr></thead>
+    <tbody id="inq-body"><tr><td colspan="6" style="text-align:center;padding:2rem;color:#9ca3af;">Loading...</td></tr></tbody>
+  </table>
+</div>
+<div id="inq-detail" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:1rem;padding:2rem;max-width:36rem;width:100%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="document.getElementById('inq-detail').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:#6b7280;">&times;</button>
+    <h2 style="font-family:Georgia,serif;font-size:1.25rem;font-weight:700;color:#0f3d12;margin-bottom:1.5rem;">Inquiry Detail</h2>
+    <div id="inq-detail-content"></div>
+    <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+      <button onclick="markInquiryStatus('replied')" class="btn-primary text-sm px-4 py-2">Mark Replied</button>
+      <button onclick="markInquiryStatus('read')" class="btn-secondary text-sm px-4 py-2">Mark Read</button>
+      <button onclick="markInquiryStatus('closed')" style="background:#fee2e2;color:#dc2626;border:none;padding:.5rem 1rem;border-radius:.375rem;cursor:pointer;font-size:.875rem;font-weight:500;">Close</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ NEWSLETTER ============ -->
+<section id="sec-newsletter" class="admin-section">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;">
+  <h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;">Newsletter Subscribers</h1>
+  <div id="newsletter-sub-count" style="background:#f0f7f1;color:#1b5e20;padding:.5rem 1rem;border-radius:.5rem;font-size:.875rem;font-weight:600;"></div>
+</div>
+<div class="card" style="overflow:auto;">
+  <table style="width:100%;border-collapse:collapse;">
+    <thead style="background:#f9fafb;"><tr>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Email</th>
+      <th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Subscribed</th>
+      <th style="padding:.5rem .75rem;"></th>
+    </tr></thead>
+    <tbody id="newsletter-nl-body"></tbody>
+  </table>
+</div>
+</section>
+
+<!-- ============ SETTINGS ============ -->
+<section id="sec-settings" class="admin-section">
+<h1 style="font-family:Georgia,serif;font-size:1.875rem;font-weight:700;color:#0f3d12;margin-bottom:2rem;">Settings</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="card p-6">
+    <h3 style="font-family:Georgia,serif;font-weight:700;color:#0f3d12;margin-bottom:1rem;">Change Password</h3>
+    <form id="pw-form">
+      <div style="margin-bottom:1rem;"><label class="form-label">Current Password</label><input type="password" class="form-input" name="current" required></div>
+      <div style="margin-bottom:1rem;"><label class="form-label">New Password</label><input type="password" class="form-input" name="new" required minlength="6"></div>
+      <div style="margin-bottom:1.5rem;"><label class="form-label">Confirm New Password</label><input type="password" class="form-input" name="confirm" required></div>
+      <div id="pw-msg" style="display:none;font-size:.875rem;margin-bottom:1rem;"></div>
+      <button type="submit" class="btn-primary">Update Password</button>
+    </form>
+  </div>
+  <div class="card p-6">
+    <h3 style="font-family:Georgia,serif;font-weight:700;color:#0f3d12;margin-bottom:1rem;">Account Info</h3>
+    <div id="acct-info" style="color:#6b7280;font-size:.875rem;line-height:1.8;"></div>
+    <div class="mt-6">
+      <h4 style="font-weight:600;color:#374151;margin-bottom:.5rem;">Quick Links</h4>
+      <div class="space-y-2">
+        <a href="/" target="_blank" style="display:block;color:#1b5e20;text-decoration:none;font-size:.875rem;">→ View Website</a>
+        <a href="https://ffsddbbtgoxbqlrnvcrm.supabase.co" target="_blank" style="display:block;color:#1b5e20;text-decoration:none;font-size:.875rem;">→ Supabase Dashboard</a>
+        <a href="https://dash.cloudflare.com" target="_blank" style="display:block;color:#1b5e20;text-decoration:none;font-size:.875rem;">→ Cloudflare Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+    </div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>tailwind.config={theme:{extend:{colors:{green:{50:'#f0f7f1',100:'#d9edd9',200:'#b4dab6',300:'#80c083',400:'#4da052',500:'#2e7d32',600:'#1b5e20',700:'#145218',800:'#0f3d12',900:'#0a290c',950:'#051506'},gold:{50:'#fdf9ec',100:'#faf0ca',200:'#f5df92',300:'#efc95a',400:'#c8a84b',500:'#b8922f',600:'#9a7424',700:'#7a5a1c',800:'#5e4415',900:'#3d2c0d',950:'#1f1506'}},fontFamily:{sans:['Inter','system-ui','sans-serif'],heading:['Georgia','Times New Roman','serif']}}}}</script>
+<script src="/js/supabase-client.js"></script>
+<script>
+
+/* ======================= SHARED: AUTH + ROUTING ======================= */
+
+const SUPABASE_URL = 'https://ffsddbbtgoxbqlrnvcrm.supabase.co';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmc2RkYmJ0Z294YnFscm52Y3JtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MjY0MTMxNCwiZXhwIjoyMDk4MjE3MzE0fQ.OJVRH623HKsMbGah9Zj3zfHLQZOgAR1zNy6fHqJ-3JA';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmc2RkYmJ0Z294YnFscm52Y3JtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NDEzMTQsImV4cCI6MjA5ODIxNzMxNH0.EYNEFQqUR7ZV63XCHKo_RuS2tIJRxN1VfF6Tx3BAb3I';
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const dbAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+
+async function checkAuth() {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) { window.location.href = '/admin/login.html'; return null; }
+  return session;
+}
+
+document.getElementById("logout-btn").addEventListener("click", async () => { await db.auth.signOut(); window.location.href = "/admin/login.html"; });
+
+const SECTION_LOADERS = {
+  dashboard: () => { loadStats(); loadRecentInquiries(); },
+  news: loadNewsItems,
+  gallery: loadGallery,
+  careers: loadCareersItems,
+  tenders: loadTendersItems,
+  events: loadEventsItems,
+  press: loadPressItems,
+  downloads: loadDownloadsItems,
+  inquiries: loadInquiries,
+  newsletter: loadNewsletterSubscribers,
+  settings: loadAcct,
+};
+
+function showSection(name) {
+  if (!SECTION_LOADERS.hasOwnProperty(name)) name = 'dashboard';
+  document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active-section'));
+  const el = document.getElementById('sec-' + name);
+  (el || document.getElementById('sec-dashboard')).classList.add('active-section');
+  document.querySelectorAll('.admin-nav-link[data-section]').forEach(a => a.classList.toggle('active', a.dataset.section === name));
+  SECTION_LOADERS[name]();
+}
+
+function routeFromHash() {
+  const name = (location.hash || '#dashboard').slice(1) || 'dashboard';
+  showSection(name);
+}
+window.addEventListener('hashchange', routeFromHash);
+
+checkAuth().then(s => {
+  if (!s) return;
+  document.getElementById("admin-user").textContent = s.user.email;
+  routeFromHash();
+});
+
+/* ======================= DASHBOARD ======================= */
+
+async function loadStats() {
+  const now = new Date().toISOString();
+  const [newsRes, tendersRes, inqRes, subsRes] = await Promise.all([
+    dbAdmin.from('news_articles').select('id', { count: 'exact', head: true }).eq('published', true),
+    dbAdmin.from('tenders').select('id', { count: 'exact', head: true }).gte('deadline', now),
+    dbAdmin.from('inquiries').select('id', { count: 'exact', head: true }).eq('status', 'new'),
+    dbAdmin.from('newsletter_subscribers').select('id', { count: 'exact', head: true }),
+  ]);
+  document.getElementById('stat-news').textContent    = newsRes.count ?? '—';
+  document.getElementById('stat-tenders').textContent = tendersRes.count ?? '—';
+  document.getElementById('stat-inq').textContent     = inqRes.count ?? '—';
+  document.getElementById('stat-subs').textContent    = subsRes.count ?? '—';
+}
+
+async function loadRecentInquiries() {
+  const { data } = await dbAdmin.from('inquiries').select('*').order('created_at', {ascending: false}).limit(5);
+  const el = document.getElementById('recent-inq');
+  if (!data || !data.length) { el.innerHTML = '<p style="color:#9ca3af;text-align:center;padding:1.5rem 0;">No inquiries yet.</p>'; return; }
+  el.innerHTML = '<table style="width:100%;border-collapse:collapse;">' +
+    '<thead><tr style="border-bottom:2px solid #f3f4f6;">' +
+    '<th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Name</th>' +
+    '<th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Subject</th>' +
+    '<th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Date</th>' +
+    '<th style="text-align:left;padding:.5rem .75rem;font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase;">Status</th>' +
+    '</tr></thead><tbody>' +
+    data.map(i =>
+      '<tr style="border-bottom:1px solid #f9fafb;">' +
+      '<td style="padding:.625rem .75rem;font-size:.875rem;color:#1f2937;font-weight:500;">' + (i.name || '') + '</td>' +
+      '<td style="padding:.625rem .75rem;font-size:.875rem;color:#6b7280;">' + (i.subject || '') + '</td>' +
+      '<td style="padding:.625rem .75rem;font-size:.75rem;color:#9ca3af;">' + (i.created_at ? new Date(i.created_at).toLocaleDateString() : '') + '</td>' +
+      '<td style="padding:.625rem .75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:' + (i.status==='new'?'#fef9c3':'#f0f7f1') + ';color:' + (i.status==='new'?'#a16207':'#1b5e20') + ';">' + (i.status || 'new') + '</span></td>' +
+      '</tr>'
+    ).join('') + '</tbody></table>';
+}
+
+/* ======================= NEWS ======================= */
+
+let newsEditId = null;
+async function loadNewsItems() {
+  const { data } = await dbAdmin.from('news_articles').select('id,title,category,published,published_at').order('created_at',{ascending:false});
+  const tb = document.getElementById('news-items-body');
+  if (!data || !data.length) { tb.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">No articles yet.</td></tr>'; return; }
+  tb.innerHTML = data.map(a =>
+    '<tr style="border-top:1px solid #f3f4f6;">' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">' + a.title + '</td>' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">' + (a.category||'') + '</td>' +
+    '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:' + (a.published?'#f0f7f1':'#f3f4f6') + ';color:' + (a.published?'#1b5e20':'#6b7280') + ';">' + (a.published?'Published':'Draft') + '</span></td>' +
+    '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">' + (a.published_at ? new Date(a.published_at).toLocaleDateString() : '') + '</td>' +
+    '<td style="padding:.75rem;text-align:right;white-space:nowrap;">' +
+    '<button onclick="editNewsItem(\'' + a.id + '\')" style="color:#1b5e20;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;margin-right:.5rem;">Edit</button>' +
+    '<button onclick="deleteNewsItem(\'' + a.id + '\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Delete</button>' +
+    '</td></tr>'
+  ).join('');
+}
+
+function openNewsModal(data={}) {
+  newsEditId = data.id || null;
+  const form = document.getElementById('news-item-form');
+  form.querySelectorAll('[name]').forEach(el => {
+    const v = data[el.name];
+    if (el.type==='checkbox') el.checked = v !== undefined ? v : el.name==='published';
+    else if (el.name==='published_at') el.value = v ? v.split('T')[0] : new Date().toISOString().split('T')[0];
+    else el.value = v || '';
+  });
+  document.getElementById('news-modal-title').textContent = newsEditId ? 'Edit Article' : 'Add Article';
+  document.getElementById('news-modal-overlay').style.display = 'flex';
+  document.getElementById('news-form-error').style.display = 'none';
+}
+
+function closeNewsModal() { document.getElementById('news-modal-overlay').style.display = 'none'; }
+
+async function editNewsItem(id) {
+  const { data } = await dbAdmin.from('news_articles').select('*').eq('id', id).single();
+  openNewsModal(data);
+}
+
+async function deleteNewsItem(id) {
+  if (!confirm('Delete this article? This cannot be undone.')) return;
+  await dbAdmin.from('news_articles').delete().eq('id', id);
+  loadNewsItems();
+}
+
+document.getElementById('news-item-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = document.getElementById('news-form-submit');
+  const err = document.getElementById('news-form-error');
+  btn.disabled=true; btn.textContent='Saving...'; err.style.display='none';
+  const fd = new FormData(e.target);
+  const payload = {
+    title: fd.get('title'), category: fd.get('category'),
+    excerpt: fd.get('excerpt'), content: fd.get('content'),
+    image_url: fd.get('image_url') || null,
+    published_at: fd.get('published_at') ? new Date(fd.get('published_at')).toISOString() : new Date().toISOString(),
+    published: fd.get('published') === 'on'
+  };
+  const { error } = newsEditId
+    ? await dbAdmin.from('news_articles').update(payload).eq('id', newsEditId)
+    : await dbAdmin.from('news_articles').insert([payload]);
+  if (error) { err.textContent = error.message; err.style.display='block'; }
+  else { closeNewsModal(); loadNewsItems(); }
+  btn.disabled=false; btn.textContent='Save';
+});
+
+/* ======================= GALLERY ======================= */
+
+let galleryAlbums = [], galleryFilterAlbum = 'all';
+
+async function loadGallery() {
+  const { data: al } = await dbAdmin.from('gallery_albums').select('*').eq('active', true).order('created_at', {ascending: false});
+  galleryAlbums = al || [];
+  const alEl = document.getElementById('gallery-albums-list');
+  alEl.innerHTML = '<button class="album-tab-btn ' + (galleryFilterAlbum==='all'?'active-tab':'') + '" onclick="setGalleryFilter(\'all\')">All</button>' +
+    galleryAlbums.map(a => '<button class="album-tab-btn ' + (galleryFilterAlbum===a.id?'active-tab':'') + '" onclick="setGalleryFilter(\'' + a.id + '\')">' + a.name + '</button>').join('');
+  const sel = document.getElementById('gallery-photo-album-select');
+  sel.innerHTML = '<option value="">No album</option>' + galleryAlbums.map(a => '<option value="' + a.id + '">' + a.name + '</option>').join('');
+  loadGalleryPhotos();
+}
+
+async function loadGalleryPhotos() {
+  const grid = document.getElementById('gallery-photos-grid');
+  let q = dbAdmin.from('gallery_items').select('id,image_url,caption,album_id').order('created_at', {ascending: false});
+  if (galleryFilterAlbum !== 'all') q = q.eq('album_id', galleryFilterAlbum);
+  const { data } = await q;
+  if (!data || !data.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#9ca3af;">No photos yet. Click + Add Photo to upload.</div>'; return; }
+  grid.innerHTML = data.map(p =>
+    '<div style="position:relative;border-radius:.75rem;overflow:hidden;aspect-ratio:1;background:#f3f4f6;">' +
+    '<img src="' + p.image_url + '" style="width:100%;height:100%;object-fit:cover;">' +
+    '<div style="position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .2s;" onmouseover="this.style.background=\'rgba(0,0,0,.4)\'" onmouseout="this.style.background=\'rgba(0,0,0,0)\'">' +
+    '<button onclick="deleteGalleryPhoto(\'' + p.id + '\')" style="position:absolute;top:.5rem;right:.5rem;background:rgba(220,38,38,.9);color:#fff;border:none;border-radius:.375rem;padding:.25rem .625rem;font-size:.75rem;font-weight:500;cursor:pointer;">Delete</button>' +
+    (p.caption ? '<p style="position:absolute;bottom:.5rem;left:.5rem;right:.5rem;color:#fff;font-size:.75rem;background:rgba(0,0,0,.5);padding:.25rem .5rem;border-radius:.25rem;">' + p.caption + '</p>' : '') +
+    '</div></div>'
+  ).join('');
+}
+
+function setGalleryFilter(id) { galleryFilterAlbum = id; loadGallery(); }
+
+function openGalleryAlbumModal() { document.getElementById('gallery-album-modal').style.display='flex'; }
+function openGalleryPhotoModal() { document.getElementById('gallery-photo-modal').style.display='flex'; }
+
+document.getElementById('gallery-album-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  await dbAdmin.from('gallery_albums').insert([{name: fd.get('name'), description: fd.get('description'), active: true}]);
+  document.getElementById('gallery-album-modal').style.display = 'none';
+  e.target.reset(); loadGallery();
+});
+
+document.querySelector('#gallery-photo-form [name=image_url]').addEventListener('blur', e => {
+  const url = e.target.value.trim();
+  if (url) { document.getElementById('gallery-preview-img').src = url; document.getElementById('gallery-photo-preview').style.display='block'; }
+});
+
+document.getElementById('gallery-photo-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const err = document.getElementById('gallery-photo-err');
+  err.style.display='none';
+  const { error } = await dbAdmin.from('gallery_items').insert([{
+    image_url: fd.get('image_url'), caption: fd.get('caption') || null,
+    album_id: fd.get('album_id') || null
+  }]);
+  if (error) { err.textContent = error.message; err.style.display='block'; }
+  else { document.getElementById('gallery-photo-modal').style.display='none'; e.target.reset(); document.getElementById('gallery-photo-preview').style.display='none'; loadGalleryPhotos(); }
+});
+
+async function deleteGalleryPhoto(id) {
+  if (!confirm('Delete this photo?')) return;
+  await dbAdmin.from('gallery_items').delete().eq('id', id);
+  loadGalleryPhotos();
+}
+
+/* ======================= CAREERS ======================= */
+
+let careersEditId=null;
+
+async function loadCareersItems(){
+  const{data}=await dbAdmin.from('job_listings').select('id,title,department,type,active,closing_date').order('created_at',{ascending:false});
+  const tb=document.getElementById('careers-items-body');
+  if(!data||!data.length){tb.innerHTML='<tr><td colspan="6" style="text-align:center;padding:2rem;color:#9ca3af;">No job listings yet.</td></tr>';return;}
+  tb.innerHTML=data.map(j=>
+  '<tr style="border-top:1px solid #f3f4f6;">' +
+  '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">'+j.title+'</td>'+
+  '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">'+(j.department||'')+'</td>'+
+  '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">'+(j.type||'')+'</td>'+
+  '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:'+(j.active?'#f0f7f1':'#f3f4f6')+';color:'+(j.active?'#1b5e20':'#6b7280')+'">'+(j.active?'Active':'Inactive')+'</span></td>'+
+  '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">'+(j.closing_date?new Date(j.closing_date).toLocaleDateString():'')+'</td>'+
+  '<td style="padding:.75rem;text-align:right;white-space:nowrap;">'+
+  '<button onclick="editCareersItem(\''+j.id+'\')" style="color:#1b5e20;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;margin-right:.5rem;">Edit</button>'+
+  '<button onclick="deleteCareersItem(\''+j.id+'\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Delete</button>'+
+  '</td></tr>'
+  ).join('');
+}
+
+function openCareersModal(data={}){careersEditId=data.id||null;const form=document.getElementById("careers-item-form");form.querySelectorAll("[name]").forEach(el=>{const v=data[el.name];if(el.type==="checkbox")el.checked=v!==undefined?v:false;else if(el.name.includes("date")&&v)el.value=v.split("T")[0];else el.value=v||"";});document.getElementById("careers-modal-title").textContent=careersEditId?"Edit":"Add New";document.getElementById("careers-modal-overlay").style.display="flex";document.getElementById("careers-form-error").style.display="none";}
+function closeCareersModal(){document.getElementById("careers-modal-overlay").style.display="none";}
+async function editCareersItem(id){const{data}=await dbAdmin.from("job_listings").select("*").eq("id",id).single();openCareersModal(data);}
+async function deleteCareersItem(id){if(!confirm("Delete this record?"))return;await dbAdmin.from("job_listings").delete().eq("id",id);loadCareersItems();}
+document.getElementById("careers-item-form").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=document.getElementById("careers-form-submit");const err=document.getElementById("careers-form-error");
+  btn.disabled=true;btn.textContent="Saving...";err.style.display="none";
+  const fd=new FormData(e.target);
+  const payload={title:fd.get('title'),department:fd.get('department'),location:fd.get('location'),type:fd.get('type'),closing_date:fd.get('closing_date')||null,description:fd.get('description'),active:fd.get('active')==='on'};
+  const{error}=careersEditId?await dbAdmin.from("job_listings").update(payload).eq("id",careersEditId):await dbAdmin.from("job_listings").insert([payload]);
+  if(error){err.textContent=error.message;err.style.display="block";}else{closeCareersModal();loadCareersItems();}
+  btn.disabled=false;btn.textContent="Save";});
+
+/* ======================= TENDERS ======================= */
+
+let tendersEditId=null;
+
+async function loadTendersItems(){
+  const{data}=await dbAdmin.from('tenders').select('id,title,reference,deadline').order('deadline',{ascending:false});
+  const tb=document.getElementById('tenders-items-body');
+  if(!data||!data.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">No tenders yet.</td></tr>';return;}
+  tb.innerHTML=data.map(t=>{
+  const dl=t.deadline?new Date(t.deadline):null;
+  const open=dl&&dl>new Date();
+  return '<tr style="border-top:1px solid #f3f4f6;">' +
+  '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">'+t.title+'</td>'+
+  '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">'+(t.reference||'—')+'</td>'+
+  '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">'+(dl?dl.toLocaleDateString():'')+'</td>'+
+  '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:'+(open?'#f0f7f1':'#f3f4f6')+';color:'+(open?'#1b5e20':'#6b7280')+'">'+(open?'Open':'Closed')+'</span></td>'+
+  '<td style="padding:.75rem;text-align:right;white-space:nowrap;">'+
+  '<button onclick="editTendersItem(\''+t.id+'\')" style="color:#1b5e20;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;margin-right:.5rem;">Edit</button>'+
+  '<button onclick="deleteTendersItem(\''+t.id+'\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Delete</button>'+
+  '</td></tr>';}).join('');
+}
+
+function openTendersModal(data={}){tendersEditId=data.id||null;const form=document.getElementById("tenders-item-form");form.querySelectorAll("[name]").forEach(el=>{const v=data[el.name];if(el.type==="checkbox")el.checked=v!==undefined?v:false;else if(el.name.includes("date")&&v)el.value=v.split("T")[0];else el.value=v||"";});document.getElementById("tenders-modal-title").textContent=tendersEditId?"Edit":"Add New";document.getElementById("tenders-modal-overlay").style.display="flex";document.getElementById("tenders-form-error").style.display="none";}
+function closeTendersModal(){document.getElementById("tenders-modal-overlay").style.display="none";}
+async function editTendersItem(id){const{data}=await dbAdmin.from("tenders").select("*").eq("id",id).single();openTendersModal(data);}
+async function deleteTendersItem(id){if(!confirm("Delete this record?"))return;await dbAdmin.from("tenders").delete().eq("id",id);loadTendersItems();}
+document.getElementById("tenders-item-form").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=document.getElementById("tenders-form-submit");const err=document.getElementById("tenders-form-error");
+  btn.disabled=true;btn.textContent="Saving...";err.style.display="none";
+  const fd=new FormData(e.target);
+  const payload={title:fd.get('title'),reference:fd.get('reference')||null,description:fd.get('description'),deadline:fd.get('deadline')?new Date(fd.get('deadline')).toISOString():null,file_url:fd.get('file_url')||null};
+  const{error}=tendersEditId?await dbAdmin.from("tenders").update(payload).eq("id",tendersEditId):await dbAdmin.from("tenders").insert([payload]);
+  if(error){err.textContent=error.message;err.style.display="block";}else{closeTendersModal();loadTendersItems();}
+  btn.disabled=false;btn.textContent="Save";});
+
+/* ======================= EVENTS ======================= */
+
+let eventsEditId=null;
+
+async function loadEventsItems(){
+  const{data}=await dbAdmin.from('events').select('id,title,location,event_date').order('event_date',{ascending:false}).limit(30);
+  const tb=document.getElementById('events-items-body');
+  if(!data||!data.length){tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">No events yet.</td></tr>';return;}
+  tb.innerHTML=data.map(e=>{
+  const d=e.event_date?new Date(e.event_date):null;
+  const upcoming=d&&d>new Date();
+  return '<tr style="border-top:1px solid #f3f4f6;">' +
+  '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">'+e.title+'</td>'+
+  '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">'+(e.location||'')+'</td>'+
+  '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">'+(d?d.toLocaleDateString():'')+'</td>'+
+  '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:'+(upcoming?'#f0f7f1':'#f3f4f6')+';color:'+(upcoming?'#1b5e20':'#6b7280')+'">'+(upcoming?'Upcoming':'Past')+'</span></td>'+
+  '<td style="padding:.75rem;text-align:right;white-space:nowrap;">'+
+  '<button onclick="editEventsItem(\''+e.id+'\')" style="color:#1b5e20;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;margin-right:.5rem;">Edit</button>'+
+  '<button onclick="deleteEventsItem(\''+e.id+'\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Delete</button>'+
+  '</td></tr>';}).join('');
+}
+
+function openEventsModal(data={}){eventsEditId=data.id||null;const form=document.getElementById("events-item-form");form.querySelectorAll("[name]").forEach(el=>{const v=data[el.name];if(el.type==="checkbox")el.checked=v!==undefined?v:false;else if(el.name.includes("date")&&v)el.value=v.split("T")[0];else el.value=v||"";});document.getElementById("events-modal-title").textContent=eventsEditId?"Edit":"Add New";document.getElementById("events-modal-overlay").style.display="flex";document.getElementById("events-form-error").style.display="none";}
+function closeEventsModal(){document.getElementById("events-modal-overlay").style.display="none";}
+async function editEventsItem(id){const{data}=await dbAdmin.from("events").select("*").eq("id",id).single();openEventsModal(data);}
+async function deleteEventsItem(id){if(!confirm("Delete this record?"))return;await dbAdmin.from("events").delete().eq("id",id);loadEventsItems();}
+document.getElementById("events-item-form").addEventListener("submit",async e=>{
+  e.preventDefault();const btn=document.getElementById("events-form-submit");const err=document.getElementById("events-form-error");
+  btn.disabled=true;btn.textContent="Saving...";err.style.display="none";
+  const fd=new FormData(e.target);
+  const payload={title:fd.get('title'),event_date:fd.get('event_date')?new Date(fd.get('event_date')).toISOString():null,location:fd.get('location'),description:fd.get('description'),image_url:fd.get('image_url')||null};
+  const{error}=eventsEditId?await dbAdmin.from("events").update(payload).eq("id",eventsEditId):await dbAdmin.from("events").insert([payload]);
+  if(error){err.textContent=error.message;err.style.display="block";}else{closeEventsModal();loadEventsItems();}
+  btn.disabled=false;btn.textContent="Save";});
+
+/* ======================= PRESS ROOM ======================= */
+
+let pressEditId = null;
+async function loadPressItems() {
+  const { data } = await dbAdmin.from('press_releases').select('id,title,category,published,published_at').order('created_at',{ascending:false});
+  const tb = document.getElementById('press-items-body');
+  if (!data||!data.length) { tb.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:#9ca3af;">No press releases yet.</td></tr>'; return; }
+  tb.innerHTML = data.map(p =>
+    '<tr style="border-top:1px solid #f3f4f6;">' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">'+p.title+'</td>'+
+    '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">'+(p.category||'')+'</td>'+
+    '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">'+(p.published_at?new Date(p.published_at).toLocaleDateString():'')+'</td>'+
+    '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:'+(p.published?'#f0f7f1':'#f3f4f6')+';color:'+(p.published?'#1b5e20':'#6b7280')+'">'+(p.published?'Published':'Draft')+'</span></td>'+
+    '<td style="padding:.75rem;text-align:right;white-space:nowrap;">'+
+    '<button onclick="editPressItem(\''+p.id+'\')" style="color:#1b5e20;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;margin-right:.5rem;">Edit</button>'+
+    '<button onclick="deletePressItem(\''+p.id+'\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Delete</button></td></tr>'
+  ).join('');
+}
+function openPressModal(data={}) {
+  pressEditId = data.id||null;
+  const form = document.getElementById('press-item-form');
+  form.querySelectorAll('[name]').forEach(el => {
+    const v = data[el.name];
+    if (el.type==='checkbox') el.checked = v!==undefined?v:true;
+    else if (el.name==='published_at') el.value = v?v.split('T')[0]:new Date().toISOString().split('T')[0];
+    else el.value = v||'';
+  });
+  document.getElementById('press-modal-title').textContent = pressEditId?'Edit Press Release':'Add Press Release';
+  document.getElementById('press-modal-overlay').style.display='flex';
+  document.getElementById('press-form-error').style.display='none';
+}
+function closePressModal() { document.getElementById('press-modal-overlay').style.display='none'; }
+async function editPressItem(id) { const{data}=await dbAdmin.from('press_releases').select('*').eq('id',id).single(); openPressModal(data); }
+async function deletePressItem(id) { if(!confirm('Delete?'))return; await dbAdmin.from('press_releases').delete().eq('id',id); loadPressItems(); }
+document.getElementById('press-item-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn=document.getElementById('press-form-submit'); const err=document.getElementById('press-form-error');
+  btn.disabled=true; btn.textContent='Saving...'; err.style.display='none';
+  const fd=new FormData(e.target);
+  const payload={title:fd.get('title'),category:fd.get('category'),summary:fd.get('summary'),file_url:fd.get('file_url')||null,published_at:fd.get('published_at')?new Date(fd.get('published_at')).toISOString():new Date().toISOString(),published:fd.get('published')==='on'};
+  const{error}=pressEditId?await dbAdmin.from('press_releases').update(payload).eq('id',pressEditId):await dbAdmin.from('press_releases').insert([payload]);
+  if(error){err.textContent=error.message;err.style.display='block';}else{closePressModal();loadPressItems();}
+  btn.disabled=false; btn.textContent='Save';
+});
+
+/* ======================= DOWNLOADS ======================= */
+
+let downloadsEditId=null;
+
+async function loadDownloadsItems(){
+  const{data}=await dbAdmin.from('downloads').select('id,title,description,published').order('created_at',{ascending:false});
+  const tb=document.getElementById('downloads-items-body');
+  if(!data||!data.length){tb.innerHTML='<tr><td colspan="4" style="text-align:center;padding:2rem;color:#9ca3af;">No downloads yet.</td></tr>';return;}
+  tb.innerHTML=data.map(d=>
+  '<tr style="border-top:1px solid #f3f4f6;">' +
+  '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">'+d.title+'</td>'+
+  '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;max-width:20rem;">'+(d.description||'')+'</td>'+
+  '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:'+(d.published?'#f0f7f1':'#f3f4f6')+';color:'+(d.published?'#1b5e20':'#6b7280')+'">'+(d.published?'Published':'Hidden')+'</span></td>'+
+  '<td style="padding:.75rem;text-align:right;white-space:nowrap;">'+
+  '<button onclick="editDownloadsItem(\''+d.id+'\')" style="color:#1b5e20;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;margin-right:.5rem;">Edit</button>'+
+  '<button onclick="deleteDownloadsItem(\''+d.id+'\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Delete</button></td></tr>'
+  ).join('');
+}
+
+function openDownloadsModal(data={}){downloadsEditId=data.id||null;const form=document.getElementById("downloads-item-form");form.querySelectorAll("[name]").forEach(el=>{const v=data[el.name];if(el.type==="checkbox")el.checked=v!==undefined?v:true;else if(el.name.includes("date")&&v)el.value=v.split("T")[0];else el.value=v||"";});document.getElementById("downloads-modal-title").textContent=downloadsEditId?"Edit":"Add New";document.getElementById("downloads-modal-overlay").style.display="flex";document.getElementById("downloads-form-error").style.display="none";}
+function closeDownloadsModal(){document.getElementById("downloads-modal-overlay").style.display="none";}
+async function editDownloadsItem(id){const{data}=await dbAdmin.from("downloads").select("*").eq("id",id).single();openDownloadsModal(data);}
+async function deleteDownloadsItem(id){if(!confirm("Delete this?"))return;await dbAdmin.from("downloads").delete().eq("id",id);loadDownloadsItems();}
+document.getElementById("downloads-item-form").addEventListener("submit",async e=>{e.preventDefault();const btn=document.getElementById("downloads-form-submit");const err=document.getElementById("downloads-form-error");btn.disabled=true;btn.textContent="Saving...";err.style.display="none";const fd=new FormData(e.target);const payload={title:fd.get('title'),description:fd.get('description'),file_url:fd.get('file_url'),published:fd.get('published')==='on'};const{error}=downloadsEditId?await dbAdmin.from("downloads").update(payload).eq("id",downloadsEditId):await dbAdmin.from("downloads").insert([payload]);if(error){err.textContent=error.message;err.style.display="block";}else{closeDownloadsModal();loadDownloadsItems();}btn.disabled=false;btn.textContent="Save";});
+
+/* ======================= INQUIRIES ======================= */
+
+let inqCurrentId = null;
+async function loadInquiries() {
+  const filter = document.getElementById('inq-status-filter').value;
+  let q = dbAdmin.from('inquiries').select('*').order('created_at', {ascending: false}).limit(50);
+  if (filter !== 'all') q = q.eq('status', filter);
+  const { data } = await q;
+  const tb = document.getElementById('inq-body');
+  if (!data || !data.length) { tb.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:#9ca3af;">No inquiries found.</td></tr>'; return; }
+  tb.innerHTML = data.map(i =>
+    '<tr style="border-top:1px solid #f3f4f6;cursor:pointer;" onclick="viewInquiry(\'' + i.id + '\')">' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;font-weight:500;">' + (i.name||'') + '</td>' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">' + (i.email||'') + '</td>' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#6b7280;">' + (i.subject||'') + '</td>' +
+    '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">' + (i.created_at?new Date(i.created_at).toLocaleDateString():'') + '</td>' +
+    '<td style="padding:.75rem;"><span style="font-size:.6875rem;font-weight:600;padding:.2rem .5rem;border-radius:2rem;background:' + (i.status==='new'?'#fef9c3':(i.status==='replied'?'#f0f7f1':'#f3f4f6')) + ';color:' + (i.status==='new'?'#a16207':(i.status==='replied'?'#1b5e20':'#6b7280')) + ';">' + (i.status||'new') + '</span></td>' +
+    '<td style="padding:.75rem;text-align:right;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></td>' +
+    '</tr>'
+  ).join('');
+}
+
+async function viewInquiry(id) {
+  inqCurrentId = id;
+  const { data } = await dbAdmin.from('inquiries').select('*').eq('id', id).single();
+  if (!data) return;
+  document.getElementById('inq-detail-content').innerHTML =
+    '<table style="width:100%;border-collapse:collapse;">' +
+    [['Name', data.name],['Email','<a href="mailto:'+data.email+'" style="color:#1b5e20;">'+data.email+'</a>'],
+     ['Phone',data.phone||'—'],['Subject',data.subject||'—'],
+     ['Date', data.created_at?new Date(data.created_at).toLocaleString():'']
+    ].map(([k,v]) => '<tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:.625rem 0;font-size:.875rem;color:#6b7280;width:40%;">'+k+'</td><td style="padding:.625rem 0;font-size:.875rem;color:#1f2937;font-weight:500;">'+v+'</td></tr>').join('') +
+    '</table>' +
+    '<div style="margin-top:1.25rem;"><p style="font-size:.875rem;color:#6b7280;font-weight:500;margin-bottom:.5rem;">Message:</p>' +
+    '<div style="background:#f9fafb;border-radius:.5rem;padding:1rem;font-size:.875rem;color:#374151;line-height:1.7;">' + (data.message||'') + '</div></div>';
+  document.getElementById('inq-detail').style.display = 'flex';
+  if (data.status === 'new') await dbAdmin.from('inquiries').update({status:'read'}).eq('id', id);
+}
+
+async function markInquiryStatus(status) {
+  if (!inqCurrentId) return;
+  await dbAdmin.from('inquiries').update({status}).eq('id', inqCurrentId);
+  document.getElementById('inq-detail').style.display = 'none';
+  loadInquiries();
+}
+
+document.getElementById('inq-status-filter').addEventListener('change', loadInquiries);
+
+/* ======================= NEWSLETTER ======================= */
+
+async function loadNewsletterSubscribers() {
+  const { data, count } = await dbAdmin.from('newsletter_subscribers').select('*', {count:'exact'}).order('subscribed_at', {ascending: false});
+  document.getElementById('newsletter-sub-count').textContent = (count || 0) + ' subscribers';
+  const tb = document.getElementById('newsletter-nl-body');
+  if (!data || !data.length) { tb.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:2rem;color:#9ca3af;">No subscribers yet.</td></tr>'; return; }
+  tb.innerHTML = data.map(s =>
+    '<tr style="border-top:1px solid #f3f4f6;">' +
+    '<td style="padding:.75rem;font-size:.875rem;color:#1f2937;">' + s.email + '</td>' +
+    '<td style="padding:.75rem;font-size:.75rem;color:#9ca3af;">' + (s.subscribed_at ? new Date(s.subscribed_at).toLocaleDateString() : '') + '</td>' +
+    '<td style="padding:.75rem;text-align:right;"><button onclick="removeNewsletterSubscriber(\'' + s.id + '\',\'' + s.email.replace(/'/g,'') + '\')" style="color:#dc2626;font-size:.8125rem;font-weight:500;background:none;border:none;cursor:pointer;">Remove</button></td>' +
+    '</tr>'
+  ).join('');
+}
+async function removeNewsletterSubscriber(id, email) {
+  if (!confirm('Remove ' + email + ' from the newsletter?')) return;
+  await dbAdmin.from('newsletter_subscribers').delete().eq('id', id);
+  loadNewsletterSubscribers();
+}
+
+/* ======================= SETTINGS ======================= */
+
+async function loadAcct() {
+  const { data: { user } } = await db.auth.getUser();
+  if (user) document.getElementById('acct-info').innerHTML =
+    '<strong>Email:</strong> ' + user.email + '<br><strong>Role:</strong> Admin<br><strong>Last Sign In:</strong> ' + (user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : '—');
+}
+
+document.getElementById('pw-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = document.getElementById('pw-msg');
+  const fd = new FormData(e.target);
+  if (fd.get('new') !== fd.get('confirm')) { msg.style.color='#dc2626'; msg.textContent='Passwords do not match.'; msg.style.display='block'; return; }
+  const { error } = await db.auth.updateUser({ password: fd.get('new') });
+  if (error) { msg.style.color='#dc2626'; msg.textContent=error.message; }
+  else { msg.style.color='#1b5e20'; msg.textContent='Password updated successfully.'; e.target.reset(); }
+  msg.style.display='block';
+});
+
+</script>
+</body></html>

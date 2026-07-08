@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Victoria Sugar</title>
+<link rel="icon" href="/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Georgia&display=swap">
+<link rel="stylesheet" href="style.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="/logo.jpg" class="brand-icon-img" onerror="this.style.display='none'">
+      <div>
+        <div class="brand-name">Victoria Sugar</div>
+        <div class="brand-sub">Admin Console</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">OVERVIEW</div>
+      <a href="#" class="nav-item active" data-page="dashboard" onclick="showPage('dashboard');return false;">
+        <span class="nav-icon">&#9670;</span> Dashboard
+      </a>
+
+      <div class="nav-section-label">CONTENT</div>
+      <a href="#" class="nav-item" data-page="news" onclick="showPage('news');return false;">
+        <span class="nav-icon">&#128240;</span> News
+      </a>
+      <a href="#" class="nav-item" data-page="gallery" onclick="showPage('gallery');return false;">
+        <span class="nav-icon">&#128247;</span> Gallery
+      </a>
+      <a href="#" class="nav-item" data-page="careers" onclick="showPage('careers');return false;">
+        <span class="nav-icon">&#128188;</span> Careers
+      </a>
+      <a href="#" class="nav-item" data-page="tenders" onclick="showPage('tenders');return false;">
+        <span class="nav-icon">&#128203;</span> Tenders
+      </a>
+      <a href="#" class="nav-item" data-page="events" onclick="showPage('events');return false;">
+        <span class="nav-icon">&#128197;</span> Events
+      </a>
+      <a href="#" class="nav-item" data-page="press" onclick="showPage('press');return false;">
+        <span class="nav-icon">&#128227;</span> Press Room
+      </a>
+      <a href="#" class="nav-item" data-page="downloads" onclick="showPage('downloads');return false;">
+        <span class="nav-icon">&#11015;</span> Downloads
+      </a>
+
+      <div class="nav-section-label">COMMUNICATIONS</div>
+      <a href="#" class="nav-item" data-page="inquiries" onclick="showPage('inquiries');return false;">
+        <span class="nav-icon">&#9993;</span> Inquiries
+      </a>
+      <a href="#" class="nav-item" data-page="newsletter" onclick="showPage('newsletter');return false;">
+        <span class="nav-icon">&#128231;</span> Newsletter
+      </a>
+
+      <div class="nav-section-label">SYSTEM</div>
+      <a href="#" class="nav-item" data-page="settings" onclick="showPage('settings');return false;">
+        <span class="nav-icon">&#9881;</span> Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div id="admin-user" class="sidebar-user"></div>
+      <button id="logout-btn" class="nav-item w-full">
+        <span class="nav-icon">&#8630;</span> Log Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-wrap" id="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="page-title" id="page-title">Dashboard</div>
+      </div>
+      <div class="topbar-right">
+        <a href="/" target="_blank" class="btn btn-outline btn-sm">View Site →</a>
+      </div>
+    </header>
+
+    <main class="content" id="content-area">
+      <!-- Pages injected by app.js -->
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script src="/js/supabase-client.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin Login — Victoria Sugar</title>
+  <link rel="icon" href="/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body style="background:linear-gradient(135deg,#0a290c,#0f3d12);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#fff;border-radius:1rem;padding:2.5rem;max-width:26rem;width:100%;box-shadow:0 25px 50px -12px rgba(0,0,0,.5);">
+    <div class="text-center mb-8">
+      <img src="/logo.jpg" style="width:4rem;height:4rem;border-radius:.75rem;object-fit:contain;margin:0 auto 1rem;">
+      <h1 style="font-family:Georgia,serif;font-size:1.5rem;font-weight:700;color:#0f3d12;">Admin Login</h1>
+      <p style="color:#6b7280;font-size:.875rem;margin-top:.25rem;">Victoria Sugar Limited</p>
+    </div>
+    <form id="login-form">
+      <div style="margin-bottom:1rem;"><label class="form-label">Email Address</label><input id="email" type="email" class="form-input" placeholder="admin@victoriasugar.com" required></div>
+      <div style="margin-bottom:1.5rem;"><label class="form-label">Password</label><input id="password" type="password" class="form-input" placeholder="••••••••" required></div>
+      <div id="login-error" style="display:none;color:#dc2626;font-size:.875rem;margin-bottom:1rem;background:#fef2f2;padding:.75rem 1rem;border-radius:.5rem;"></div>
+      <button type="submit" id="login-btn" class="btn-primary w-full justify-center">Sign In</button>
+    </form>
+    <p style="color:#9ca3af;font-size:.75rem;text-align:center;margin-top:1.5rem;">For access issues contact your administrator.</p>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>tailwind.config={theme:{extend:{colors:{green:{50:'#f0f7f1',100:'#d9edd9',200:'#b4dab6',300:'#80c083',400:'#4da052',500:'#2e7d32',600:'#1b5e20',700:'#145218',800:'#0f3d12',900:'#0a290c',950:'#051506'},gold:{50:'#fdf9ec',100:'#faf0ca',200:'#f5df92',300:'#efc95a',400:'#c8a84b',500:'#b8922f',600:'#9a7424',700:'#7a5a1c',800:'#5e4415',900:'#3d2c0d',950:'#1f1506'}},fontFamily:{sans:['Inter','system-ui','sans-serif'],heading:['Georgia','Times New Roman','serif']}}}}</script>
+<script src="/js/supabase-client.js"></script>
+<script>
+
+const SUPABASE_URL = 'https://ffsddbbtgoxbqlrnvcrm.supabase.co';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmc2RkYmJ0Z294YnFscm52Y3JtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MjY0MTMxNCwiZXhwIjoyMDk4MjE3MzE0fQ.OJVRH623HKsMbGah9Zj3zfHLQZOgAR1zNy6fHqJ-3JA';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmc2RkYmJ0Z294YnFscm52Y3JtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NDEzMTQsImV4cCI6MjA5ODIxNzMxNH0.EYNEFQqUR7ZV63XCHKo_RuS2tIJRxN1VfF6Tx3BAb3I';
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const dbAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+
+(async () => { const { data: { session } } = await db.auth.getSession(); if (session) window.location.href = "/admin/"; })();
+document.getElementById("login-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = document.getElementById("login-btn");
+  const err = document.getElementById("login-error");
+  btn.disabled=true; btn.textContent="Signing in..."; err.style.display="none";
+  const { error } = await db.auth.signInWithPassword({ email: document.getElementById("email").value, password: document.getElementById("password").value });
+  if (error) { err.textContent = error.message; err.style.display="block"; btn.disabled=false; btn.textContent="Sign In"; }
+  else { window.location.href = "/admin/"; }
+});
+</script>
+</body></html>
