@@ -1,0 +1,34 @@
+name = "vsl-media-upload"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+account_id = "4fb1ca4024d02baee6d3b7836495889c"
+
+# R2 bucket binding — lets the Worker read/write the bucket directly
+# without needing separate S3-style API keys.
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "vsl-media"
+
+# These match the values already used by the admin panel's app.js.
+# The anon key is meant to be public (it has no special privileges on
+# its own), so it's safe to ship inside the Worker.
+[vars]
+SUPABASE_URL = "https://ffsddbbtgoxbqlrnvcrm.supabase.co"
+SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZmc2RkYmJ0Z294YnFscm52Y3JtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI2NDEzMTQsImV4cCI6MjA5ODIxNzMxNH0.EYNEFQqUR7ZV63XCHKo_RuS2tIJRxN1VfF6Tx3BAb3I"
+# Reply-to address used for outgoing inquiry emails (not secret).
+CONTACT_EMAIL = "info@victoriasugar.com"
+
+# RESEND_API_KEY is NOT set here — it's a secret. Set it with:
+#   wrangler secret put RESEND_API_KEY
+# Until it's set, /send-email returns a clear error and the admin panel
+# falls back to opening the admin's own email client instead.
+
+# Once deployed, add routes so the admin panel can reach this Worker at
+# https://media.victoriasugar.ug/upload and /send-email (see DEPLOY.md, step 4).
+# You can also uncomment and adjust this instead of adding the route by hand:
+# [[routes]]
+# pattern = "media.victoriasugar.ug/upload*"
+# zone_name = "victoriasugar.ug"
+# [[routes]]
+# pattern = "media.victoriasugar.ug/send-email*"
+# zone_name = "victoriasugar.ug"

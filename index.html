@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Georgia&display=swap">
 <link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
@@ -40,14 +41,8 @@
       <a href="#" class="nav-item" data-page="careers" onclick="showPage('careers');return false;">
         <span class="nav-icon">&#128188;</span> Careers
       </a>
-      <a href="#" class="nav-item" data-page="tenders" onclick="showPage('tenders');return false;">
-        <span class="nav-icon">&#128203;</span> Tenders
-      </a>
       <a href="#" class="nav-item" data-page="events" onclick="showPage('events');return false;">
         <span class="nav-icon">&#128197;</span> Events
-      </a>
-      <a href="#" class="nav-item" data-page="press" onclick="showPage('press');return false;">
-        <span class="nav-icon">&#128227;</span> Press Room
       </a>
       <a href="#" class="nav-item" data-page="downloads" onclick="showPage('downloads');return false;">
         <span class="nav-icon">&#11015;</span> Downloads
@@ -56,9 +51,6 @@
       <div class="nav-section-label">COMMUNICATIONS</div>
       <a href="#" class="nav-item" data-page="inquiries" onclick="showPage('inquiries');return false;">
         <span class="nav-icon">&#9993;</span> Inquiries
-      </a>
-      <a href="#" class="nav-item" data-page="newsletter" onclick="showPage('newsletter');return false;">
-        <span class="nav-icon">&#128231;</span> Newsletter
       </a>
 
       <div class="nav-section-label">SYSTEM</div>
@@ -82,7 +74,7 @@
         <div class="page-title" id="page-title">Dashboard</div>
       </div>
       <div class="topbar-right">
-        <a href="/" target="_blank" class="btn btn-outline btn-sm">View Site →</a>
+        <a href="https://victoriasugar.ug/" target="_blank" class="btn btn-outline btn-sm">View Site →</a>
       </div>
     </header>
 
@@ -93,6 +85,7 @@
 
   <div class="toast" id="toast"></div>
 
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script src="/js/supabase-client.js"></script>
 <script src="app.js"></script>
 </body>
